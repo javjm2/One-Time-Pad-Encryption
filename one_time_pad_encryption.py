@@ -6,9 +6,11 @@ KEY = []
 
 def create_key(user_input):
     plain_text = user_input.replace(' ', '')
+    plain_text = plain_text.strip()
+    key_range = string.ascii_letters + '0123456789'
 
     for letter in plain_text:
-        KEY.append(random.choice(string.ascii_letters + '0123456789'))
+        KEY.append(random.choice(key_range))
     return plain_text, ''.join(KEY).replace(' ', '')
 
 
@@ -17,10 +19,12 @@ def convert_plain_text_and_key(plain_text, key):
     key_list = []
 
     for plain_character, key_character in zip(plain_text, key):
-        p_binary = bin(ord(plain_character))
-        k_binary = bin(ord(key_character))
-        p_binary = p_binary.replace('b', '')
-        k_binary = k_binary.replace('b', '')
+        try:
+            k_binary = '{0:08b}'.format(int(key_character))
+        except ValueError:
+            k_binary = bin(ord(key_character)).replace('b', '')
+
+        p_binary = bin(ord(plain_character)).replace('b', '')
         plain_text_list.append(p_binary)
         key_list.append(k_binary)
 
@@ -71,6 +75,7 @@ def main():
 
     print(f'Cipher text of the user input "{user_input}": "{binary_to_string(cipher_text_binary)}"')
     decrypted_plain_text_binary = decrypt(cipher_text_binary, key_binary)
+
     if decrypted_plain_text_binary == plain_text_binary:
         print(user_input)
     else:
