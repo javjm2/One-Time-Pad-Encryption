@@ -77,7 +77,5 @@ def main():
         raise Exception('The plain text message and the decrypted version of that message do not match')
 
 
-
-
 if __name__ == "__main__":
     main()
