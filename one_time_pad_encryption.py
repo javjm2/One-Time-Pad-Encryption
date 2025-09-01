@@ -8,7 +8,7 @@ def create_key(user_input):
     plain_text = user_input.replace(' ', '')
 
     for letter in plain_text:
-        KEY.append(random.choice(string.ascii_letters))
+        KEY.append(random.choice(string.ascii_letters + '0123456789'))
     return plain_text, ''.join(KEY).replace(' ', '')
 
 
