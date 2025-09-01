@@ -4,7 +4,7 @@ import random
 KEY = []
 
 
-def create_key(user_input):
+def create_encryption_key(user_input):
     plain_text = user_input.replace(' ', '')
     plain_text = plain_text.strip()
     key_range = string.ascii_letters + '0123456789'
@@ -14,7 +14,7 @@ def create_key(user_input):
     return plain_text, ''.join(KEY).replace(' ', '')
 
 
-def convert_plain_text_and_key(plain_text, key):
+def binary_conversion_plain_text_and_key(plain_text, key):
     plain_text_list = []
     key_list = []
 
@@ -68,9 +68,9 @@ def binary_to_string(binaryString):
 
 
 def main():
-    user_input = input('Enter value' + '\n')
-    plain_text, key = create_key(user_input)
-    plain_text_binary, key_binary = convert_plain_text_and_key(plain_text, key)
+    user_input = input('Enter a message for encryption:' + '\n')
+    plain_text, key = create_encryption_key(user_input)
+    plain_text_binary, key_binary = binary_conversion_plain_text_and_key(plain_text, key)
     cipher_text_binary = encrypt(plain_text_binary, key_binary)
 
     print(f'Cipher text of the user input "{user_input}": "{binary_to_string(cipher_text_binary)}"')
