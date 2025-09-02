@@ -1,5 +1,5 @@
 import string
-import random
+import secrets
 
 KEY = []
 
@@ -9,8 +9,8 @@ def create_encryption_key(user_input):
     plain_text = plain_text.strip()
     key_range = string.ascii_letters + '0123456789'
 
-    for letter in plain_text:
-        KEY.append(random.choice(key_range))
+    for i in range(len(plain_text)):
+        KEY.append(secrets.choice(key_range))
     return plain_text, ''.join(KEY).replace(' ', '')
 
 
